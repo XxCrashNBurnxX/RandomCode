@@ -15,13 +15,28 @@ try:
     tax_e = float(input('What is the maximum income at 32% tax rate for your filing status?: '))
     tax_f = float(input('What is the maximum income at 35% tax rate for your filing status?: '))
     witholding = float(input("How much Federal Taxes are being withheld each paycheck?: "))
-    paychecks = float(input("How many paychecks do you receive in one year?: "))
-    income = float(input("What is your yearly gross income?: "))    
+    paychecks = int(input("How many paychecks do you receive in one year?: "))
+    months_worked = int(input("How many months in the current tax year have you worked?: "))
+    income = float(input("What is your yearly gross income?: ")) 
+    
     
 except ValueError:
-    print("All values supplied must be a decimal number. Exiting...")
+    print("All values supplied must be a whole or decimal number. Exiting...")
     exit()
     
+paychecks_received = ((paychecks / 12) * months_worked)
+
+if months_worked < 12:
+    if paychecks == 26:
+        income = ((income / paychecks) * paychecks_received)
+    elif paychecks == 24:
+        income = ((income / paychecks) * paychecks_received)
+    elif paychecks == 12:
+        income = ((income / paychecks) * paychecks_received)
+    else:
+        print("Sorry, that is not a valid number of paychecks")
+        exit()
+
 
 def tax_check_a(income, tax_liability=0):
     """Checks to see if income is greater than first tax bracket of $9,525"""
@@ -101,18 +116,20 @@ def tax_check_f(income, tax_liability):
         
   
 cost = tax_check_a(income)
-total_witholding = (witholding * paychecks)
+total_witholding = (witholding * paychecks_received)
 
-
+print("Your total taxable income is {income}".format(income=income))
 print('\nYour yearly tax liability is ${cost}'.format(cost=cost))
 print("\nYour total witholding is ${total_witholding}".format(total_witholding=total_witholding))
 
 if cost > total_witholding:
     diff1 = (cost - total_witholding)
-    print("\nYou will owe the Federal Government ${diff1}".format(diff1=diff1))
+    paycheck_divide = (diff1 / paychecks)
+    print("\nYou will owe the Federal Government ${diff1}.\n\nYou should withold an additional ${paycheck_divide} per paycheck".format(diff1=diff1, 
+                                                                                                                                       paycheck_divide=paycheck_divide))
 else:
     diff2 = abs(cost - total_witholding)
-    print("\n The Federal Government will issue an estimated refund in the amount of ${diff2}".format(diff2=diff2))
+    print("\nThe Federal Government will issue an estimated refund in the amount of ${diff2}".format(diff2=diff2))
     
 
 
