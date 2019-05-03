@@ -1,12 +1,12 @@
 #Author: Bryan Bijonowski
 #Date Created: 05/01/2019
-#Date Modified: 05/01/2019
+#Date Modified: 05/02/2019
 #Purpose: To provide information regarding amount owed for taxes based on total tax liability.
 
 #TO-DO:
+#See Below
 #Add deduction features (standardized and itemized)
 #Add restart feature upon user input error
-#Fix witholding X amount extra to reflect number of months left in calendar year
 #Add color text
 
 
@@ -14,7 +14,8 @@ filing_status = str(input("Welcome. Please designate your filing status as follo
       "Single = S\n"
       "Head of Household = H\n"
       "Married Filing Jointly = M\n"
-      "Married Filing Separately = T\n\n"
+      "Married Filing Separately = T\n"
+      "Input Tax Brackets Manually = A\n\n"
       "Filing Status: "))
 
 if filing_status.upper() == "S":
@@ -53,19 +54,32 @@ elif filing_status.upper() == "T":
     tax_e = float(200000.0)    
     tax_f = float(300000.0)
 
+elif filing_status.upper() == "A":
+    
+    try:
+        
+        tax_a = float(input('What is the maximum income at 10% tax rate for your filing status?: '))
+        tax_b = float(input('What is the maximum income at 12% tax rate for your filing status?: '))
+        tax_c = float(input('What is the maximum income at 22% tax rate for your filing status?: '))
+        tax_d = float(input('What is the maximum income at 24% tax rate for your filing status?: '))
+        tax_e = float(input('What is the maximum income at 32% tax rate for your filing status?: '))
+        tax_f = float(input('What is the maximum income at 35% tax rate for your filing status?: ')) 
+        
+    except ValueError:
+        
+        print("All values supplied must be a whole or decimal number. Exiting...")
+        exit()
+    
+
 else:
+    
     print("You did not select an appropriate filing status. Exiting...")
     exit()
 
 
 try:
     
-    #tax_a = float(input('What is the maximum income at 10% tax rate for your filing status?: '))
-    #tax_b = float(input('What is the maximum income at 12% tax rate for your filing status?: '))
-    #tax_c = float(input('What is the maximum income at 22% tax rate for your filing status?: '))
-    #tax_d = float(input('What is the maximum income at 24% tax rate for your filing status?: '))
-    #tax_e = float(input('What is the maximum income at 32% tax rate for your filing status?: '))
-    #tax_f = float(input('What is the maximum income at 35% tax rate for your filing status?: '))
+    
     witholding = float(input("How much Federal Taxes are being withheld each paycheck?: "))
     paychecks = int(input("How many paychecks do you receive in one year?: "))
     months_worked = int(input("How many months in the current tax year have you worked?: "))
@@ -73,6 +87,7 @@ try:
     
     
 except ValueError:
+    
     print("All values supplied must be a whole or decimal number. Exiting...")
     exit()
     
@@ -91,8 +106,7 @@ def tax_check_a(income, tax_liability=0):
         tax_liability += (tax_a * .10)
         total_tax_liability = tax_check_b(income, tax_liability)
         return total_tax_liability
-        
-        
+         
     else:
         tax_liability += (income * .10)
         return tax_liability
@@ -209,3 +223,39 @@ if total_tax_liability > total_witholding:
 else:
     diff2 = abs(round((total_tax_liability - total_witholding), 2))
     print("\nTotal Estimated Federal Government Refund: ${diff2}.".format(diff2=diff2))
+
+
+
+
+
+
+#Fix Below:
+
+"""Welcome. Please designate your filing status as follows:
+
+Single = S
+Head of Household = H
+Married Filing Jointly = M
+Married Filing Separately = T
+
+Filing Status: s
+How much Federal Taxes are being withheld each paycheck?: 1012.3
+How many paychecks do you receive in one year?: 12
+How many months in the current tax year have you worked?: 8
+What is your yearly gross income?: 74450
+
+Total Gross Income YTD: $49633.33.
+
+Total Tax Liability YTD: $6858.83.
+
+Total Net Income YTD: $42774.5.
+
+Total Witheld YTD: $8098.4.
+
+Total Witheld Per Paycheck: $1012.3.
+
+Correct Total To Be Witheld Per Paycheck: $1026.54.
+
+Total Deficiency Per Paycheck: $14.24. 
+
+Total Estimated Federal Government Refund: $1239.57."""
