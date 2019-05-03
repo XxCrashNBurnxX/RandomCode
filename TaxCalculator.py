@@ -79,10 +79,13 @@ else:
 
 try:
     
-    
-    witholding = float(input("How much Federal Taxes are being withheld each paycheck?: "))
-    paychecks = int(input("How many paychecks do you receive in one year?: "))
     months_worked = int(input("How many months in the current tax year have you worked?: "))
+    if months_worked > 12:
+        print("That is too many months in a calendar year. Exiting...")
+        exit()
+        
+    paychecks = int(input("How many paychecks do you receive in one year?: "))
+    witholding = float(input("How much Federal Taxes are being withheld each paycheck?: "))
     income = float(input("What is your yearly gross income?: ")) 
     
     
