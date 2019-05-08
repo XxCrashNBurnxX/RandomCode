@@ -235,30 +235,20 @@ else:
 #Fix Below:
 
 """Welcome. Please designate your filing status as follows:
-
 Single = S
 Head of Household = H
 Married Filing Jointly = M
 Married Filing Separately = T
-
 Filing Status: s
 How much Federal Taxes are being withheld each paycheck?: 1012.3
 How many paychecks do you receive in one year?: 12
 How many months in the current tax year have you worked?: 8
 What is your yearly gross income?: 74450
-
 Total Gross Income YTD: $49633.33.
-
 Total Tax Liability YTD: $6858.83.
-
 Total Net Income YTD: $42774.5.
-
 Total Witheld YTD: $8098.4.
-
 Total Witheld Per Paycheck: $1012.3.
-
 Correct Total To Be Witheld Per Paycheck: $1026.54.
-
 Total Deficiency Per Paycheck: $14.24. 
-
-Total Estimated Federal Government Refund: $1239.57."""
+Total Estimated Federal Government Refund: $1239.57."""    
