@@ -7,7 +7,6 @@
 ###Imports###
 
 import sys
-import re
 from ipaddress import ip_address
 
 ###Main Body###
@@ -20,12 +19,13 @@ def main():
         if len(sys.argv) < 2 or len(sys.argv) > 2:
             """"Checks that at least and no more than one argument is passed."""
             
-            print("Please provide one, and only one, argument of a file containing IP Addresses!: ip_sorter.py <file_containing_ips>")
+            print("Please provide ONE argument of a file containing IP Addresses!: ip_sorter.py <file_containing_ips>")
             sys.exit()
             
             
         with open(sys.argv[1], "r") as ip_file:
-            """"""
+            """Opens ingested file containing presumably IP Addresses, reading each line, validating against known requirements of what constitutes a valid IP Address, 
+            and then sorts the IP Addresses numerically."""
             
             if len(ip_file.readlines()) <= 1:
                 """Checks to ensure the file being read in has at least two items to sort"""
