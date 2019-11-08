@@ -33,13 +33,13 @@ def main():
                 print("Please provide a list of IP's containing at least two IP Addresses to sort!")
                 sys.exit()  
             
-            ip_file.seek(0,0) #Returns pointer back to the beginning of the file.
+            ip_file.seek(0,0) #Returns pointer back to the beginning of the file so it can be read again.
             
             valid_ips = [ip.strip() for ip in ip_file.readlines() if ip_address(ip.strip())] #Ensures each element provided is a valid IP.
                                          
-            ip_list_sorted = sorted(valid_ips, key = lambda ip: tuple(map(int, ip.split('.'))))
+            ip_list_sorted = sorted(valid_ips, key = lambda ip: tuple(map(int, ip.split('.')))) #Sorts the confirmed valid IP Addresses numerically.
             
-            print(ip_list_sorted, file=sys.stdout)
+            print(ip_list_sorted, file=sys.stdout) #Prints the sorted list in numerical ascending order.
      
     except ValueError as E:
         """Validates the contents of the file as a catchall"""
